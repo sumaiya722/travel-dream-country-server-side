@@ -68,6 +68,12 @@ async function run() {
             const query = { uid: uid };
             const result = await cart_Collection.deleteMany(query);
             res.json(result);
+        });
+
+        //orders get api
+        app.get('/orders', async (req, res) => {
+            const result = await cart_Collection.find({}).toArray()
+            res.json(result)
         })
 
     }
