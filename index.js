@@ -74,6 +74,19 @@ async function run() {
         app.get('/orders', async (req, res) => {
             const result = await cart_Collection.find({}).toArray()
             res.json(result)
+        });
+
+        //confirmation get api
+        app.put("/confirmation/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const service = {
+                $set: {
+                    status: "Confirm"
+                },
+            };
+            const result = await cart_Collection.updateOne(query, service);
+            res.json(result);
         })
 
     }
